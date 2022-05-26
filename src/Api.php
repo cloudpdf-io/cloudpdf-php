@@ -50,6 +50,28 @@ class Api
     return $res;
   }
 
+  public function delete(string $url): string
+  {
+    curl_setopt($this->client, CURLOPT_URL, $this->getUrl($url));
+    curl_setopt($this->client, CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+    /** @var string $res */
+    $res = curl_exec($this->client);
+
+    if (curl_errno($this->client)) {
+      $error_msg = curl_error($this->client);
+    }
+
+    curl_close($this->client);
+
+    if (isset($error_msg)) {
+      $status = curl_getinfo($this->client, CURLINFO_RESPONSE_CODE);
+      throw new \Exception('Status: ' . $status . '. Message: ' . $error_msg);
+    }
+
+    return $res;
+  }
+
   /**
    * @param array<string,mixed> $params
    */
@@ -57,6 +79,32 @@ class Api
   {
     curl_setopt($this->client, CURLOPT_URL, $this->getUrl($url));
     curl_setopt($this->client, CURLOPT_CUSTOMREQUEST, 'PATCH');
+    curl_setopt($this->client, CURLOPT_POSTFIELDS, json_encode($params));
+
+    /** @var string $res */
+    $res = curl_exec($this->client);
+
+    if (curl_errno($this->client)) {
+      $error_msg = curl_error($this->client);
+    }
+
+    curl_close($this->client);
+
+    if (isset($error_msg)) {
+      $status = curl_getinfo($this->client, CURLINFO_RESPONSE_CODE);
+      throw new \Exception('Status: ' . $status . '. Message: ' . $error_msg);
+    }
+
+    return $res;
+  }
+
+  /**
+   * @param array<string,mixed> $params
+   */
+  public function put(string $url, array $params): string
+  {
+    curl_setopt($this->client, CURLOPT_URL, $this->getUrl($url));
+    curl_setopt($this->client, CURLOPT_CUSTOMREQUEST, 'PUT');
     curl_setopt($this->client, CURLOPT_POSTFIELDS, json_encode($params));
 
     /** @var string $res */
