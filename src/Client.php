@@ -11,7 +11,7 @@ class Client
   private $cloudName;
   /** @var string */
   private $signingSecret;
-  /** @var bolean */
+  /** @var bool */
   private $isSigned = false;
   /** @var string */
   protected static $apiBase = 'https://api.cloudpdf.io/v2';
