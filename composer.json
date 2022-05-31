@@ -1,6 +1,5 @@
 {
   "name": "cloudpdf/api",
-  "version": "1.0.0",
   "description": "API Wrapper for the CloudPDF API",
   "type": "library",
   "license": "MIT",
