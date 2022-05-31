@@ -144,6 +144,16 @@ class Client
       ->patch('/documents/' . $id . '/files/' . $fileId, $parameters);
   }
 
+  public function getDocumentFile(string $documentId, string $fileId) 
+  {
+    return $this
+      ->factory('APIV2GetDocumentFile', new \ArrayObject([
+        'id' => $documentId,
+        'fileId' => $fileId
+      ]))
+      ->get('/documents/' . $documentId . '/files/' . $fileId);
+  }
+
   /** Document TOKEN generation */
   public function getViewerToken(array $params, int $expiresIn = 60*60) {
     return $this
