@@ -27,7 +27,7 @@ class Client
     $this->cloudName = $config['cloudName'] ?? null;
     $this->signingSecret = $config['signingSecret'] ?? null;
 
-    if($config['cloudName'] && $config['signingSecret']) {
+    if($this->cloudName && $this->signingSecret) {
       $this->isSigned = true;
     }
   }
